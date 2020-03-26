@@ -6,19 +6,14 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
-    public function show($post)
+    public function show($slug)
     {
-        $blog = [
-            'my-first-post' => 'Hello, this is my first post!',
-            'my-second-post' => 'Hi, I am sharing my second post!'
-        ];
-    
-        if (! array_key_exists($post, $blog)) {
-            abort(404, 'Sorry, page not found.');
-        }
+        $post = \Illuminate\Support\Facades\DB::table('post')->where('slug', $slug)->first();
+
+        //dd($post);
     
         return view('post', [
-            'post' => $blog[$post] // ?? 'Nothing here.'
+            'post' => $post // ?? 'Nothing here.'
         ]);
     }
 }
