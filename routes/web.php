@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+        return view('welcome');
+    });
 
 // Returning strings
 Route::get('/welcome', function () {
@@ -56,3 +56,8 @@ Route::get('/test', function () {
 
 // Route using controllers
 Route::get('/post/{post}', 'PostsController@show');
+
+Route::view('/about', 'about');
+// Route::get('/', function () {
+//     return view('a');
+// });
