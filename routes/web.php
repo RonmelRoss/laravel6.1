@@ -58,6 +58,10 @@ Route::get('/test', function () {
 Route::get('/post/{post}', 'PostsController@show');
 
 Route::view('/about', 'about');
-// Route::get('/', function () {
-//     return view('a');
-// });
+
+Route::view('/simple-work', 'simple-work-home');
+
+// Route::view('/simple-work/about', 'simple-work-about');
+Route::get('/simple-work/about', function () {
+    return view('simple-work-about');
+});

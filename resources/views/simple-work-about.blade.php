@@ -1,4 +1,4 @@
-@extends ('layout')
+@extends ('simple-work-layout')
 
 @section ('header')
 <div id="header-featured">
