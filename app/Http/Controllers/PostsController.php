@@ -3,17 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Post;
 
 class PostsController extends Controller
 {
     public function show($slug)
     {
-        $post = \Illuminate\Support\Facades\DB::table('post')->where('slug', $slug)->first();
+        // $post = DB::table('post')->where('slug', $slug)->first();
+        // $post = Post::where('slug', $slug)->firstOrFail();
 
-        //dd($post);
+        // dd($post);
+        // if (! $post) {
+        //     abort(404);
+        // }
     
+        // return view('post', [
+            // 'post' => $post // ?? 'Nothing here.'
+        // ]);
+
         return view('post', [
-            'post' => $post // ?? 'Nothing here.'
+            'post' => Post::where('slug', $slug)->firstOrFail()
         ]);
     }
 }
