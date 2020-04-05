@@ -73,6 +73,7 @@ Route::get('/about', function(){
 });
 
 Route::get('/articles/{article}', 'ArticlesController@show');
+Route::get('/articles', 'ArticlesController@index');
 
 Route::view('/simple-work', 'simple-work-home');
 
