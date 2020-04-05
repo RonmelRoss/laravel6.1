@@ -57,7 +57,20 @@ Route::get('/test', function () {
 // Route using controllers
 Route::get('/post/{post}', 'PostsController@show');
 
-Route::view('/about', 'about');
+// Route::view('/about', 'about');
+Route::get('/about', function(){
+    // $article = App\Article::all();
+    // $article = App\Article::take(2)->get();
+    // $article_paging = App\Article::paginate();
+    $article = App\Article::take(2)->latest()->get();
+
+    // dd($article);
+    // return $article_paging;
+
+    return view('about', [
+        'articles' => $article
+    ]);
+});
 
 Route::view('/simple-work', 'simple-work-home');
 
