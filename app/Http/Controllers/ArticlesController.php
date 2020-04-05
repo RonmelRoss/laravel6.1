@@ -13,7 +13,7 @@ class ArticlesController extends Controller
 
         return view('articles.index', ['article' => $articles]);
     }
-
+    
     public function store()
     {
         // die("hello");
@@ -29,17 +29,35 @@ class ArticlesController extends Controller
         return redirect('/articles');
     }
 
+    public function create()
+    {
+        return view('articles.create');
+    }
+
     public function show($id)
     {
         
         $article = Article::find($id);
-        //dd($article);
 
         return view('articles.show', ['article' => $article]);
     }
 
-    public function create()
+    public function edit($id)
     {
-        return view('articles.create');
+        $article = Article::find($id); 
+        return view('articles.edit', compact('article'));
+    }
+
+    public function update($id)
+    {
+        $article = Article::find($id);
+        
+        $article->title = request('title');
+        $article->excerpt = request('excerpt');
+        $article->body = request('body');
+
+        $article->save();
+
+        return redirect('/articles/' . $article->id);
     }
 }
