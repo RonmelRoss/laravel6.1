@@ -13,6 +13,22 @@ class ArticlesController extends Controller
 
         return view('articles.index', ['article' => $articles]);
     }
+
+    public function store()
+    {
+        // die("hello");
+        // dump(request()->all());
+        $article = new Article();
+
+        $article->title = request('title');
+        $article->excerpt = request('excerpt');
+        $article->body = request('body');
+
+        $article->save();
+
+        return redirect('/articles');
+    }
+
     public function show($id)
     {
         
@@ -20,5 +36,10 @@ class ArticlesController extends Controller
         //dd($article);
 
         return view('articles.show', ['article' => $article]);
+    }
+
+    public function create()
+    {
+        return view('articles.create');
     }
 }
