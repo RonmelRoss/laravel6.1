@@ -62,7 +62,7 @@ Route::get('/about', function(){
     // $article = App\Article::all();
     // $article = App\Article::take(2)->get();
     // $article_paging = App\Article::paginate();
-    $article = App\Article::take(2)->latest()->get();
+    $article = App\Article::take(3)->latest()->get();
 
     // dd($article);
     // return $article_paging;
@@ -71,6 +71,8 @@ Route::get('/about', function(){
         'articles' => $article
     ]);
 });
+
+Route::get('/articles/{article}', 'ArticlesController@show');
 
 Route::view('/simple-work', 'simple-work-home');
 
