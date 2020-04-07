@@ -38,29 +38,25 @@ class ArticlesController extends Controller
         return view('articles.create');
     }
 
-    public function show($id)
-    {
-        
-        $article = Article::find($id);
+    public function show(Article $article)
+    {   
+        //$article = Article::findOrFail($id);
 
         return view('articles.show', ['article' => $article]);
     }
 
-    public function edit($id)
+    public function edit(Article $article)
     {
-        $article = Article::find($id); 
         return view('articles.edit', compact('article'));
     }
 
-    public function update($id)
+    public function update(Article $article)
     {
         request()->validate([
             'title' => 'required',
             'excerpt' => 'required',
             'body' => 'required'
         ]);
-
-        $article = Article::find($id);
         
         $article->title = request('title');
         $article->excerpt = request('excerpt');
