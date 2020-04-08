@@ -22,4 +22,9 @@ class Article extends Model
         // added second parameter which is the FK for User table
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }
