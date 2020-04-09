@@ -21,38 +21,29 @@ class ArticlesController extends Controller
     
     public function store()
     {
-        // request()->validate([
-        //     'title' => 'required',
-        //     'excerpt' => 'required',
-        //     'body' => 'required'
-        // ]);
-
-        // $article = new Article();
-
-        // $article->title = request('title');
-        // $article->excerpt = request('excerpt');
-        // $article->body = request('body');
+        // Code in the next line actually works even additional validation
+        // for tags is present in validateArticle(). For training purposes,
+        // it is commented out to mirror the code in Laracast.
+        // $article = new Article($this->validateArticle());
         
-        // $article->save();
+        $this->validateArticle();
+        $article = new Article(request(['title', 'excerpt', 'body']));
+        $article->user_id = 1;
+        $article->save();
 
-        // +++++++++++++++++++++
-        // Validate then create article
-        // The commented lines below have been refactored to use
-        // the validateArticle() function
-        // Article::create(request()->validate([
-        //     'title' => 'required',
-        //     'excerpt' => 'required',
-        //     'body' => 'required'
-        // ]));
+        $article->tags()->attach(request('tags'));
 
-        Article::create($this->validateArticle());
+
+        // Article::create($this->validateArticle());
 
         return redirect(route('articles.index'));
     }
 
     public function create()
     {
-        return view('articles.create');
+        return view('articles.create', [
+            'tags' => Tag::all()
+        ]);
     }
 
     public function show(Article $article)
@@ -85,7 +76,8 @@ class ArticlesController extends Controller
         return request()->validate([
             'title' => 'required',
             'excerpt' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'tags' => 'exists:tags,id'  //performs a query on tags table to make sure it contains specified data
         ]);
     }
 }
