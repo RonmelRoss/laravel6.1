@@ -3,9 +3,9 @@
 
     class Example
     {
-        public function go()
+        public function handle()
         {
-            dump('It works!');
+            die('It works!');
         }
     }
 ?>

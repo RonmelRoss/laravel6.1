@@ -99,3 +99,7 @@ Route::get('/container', function () {
 
     $example->go();
 });
+
+Route::get('/facade', function () {
+    return (App\ExampleFacade::handle());
+});
